@@ -1,26 +1,28 @@
-/* --- VARIABLES Y SISTEMA DE DISEÑO --- */
+/* --- VARIABLES Y SISTEMA DE DISEÑO (PALETA HÍBRIDA: OCÉANO & ESMERALDA) --- */
 :root {
-    --bg-main: #f4f6f9;
-    --bg-card: #ffffff;
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
-    --accent-color: #2563eb;
-    --accent-hover: #1d4ed8;
-    --border-color: #e5e7eb;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* MODO CLARO: Fondos azul cielo muy suaves con acentos verde esmeralda vibrantes */
+    --bg-main: #f0f9ff;          /* Azul cielo ultraclaro que da frescura y profundidad */
+    --bg-card: #ffffff;          /* Blanco puro para que las tarjetas resalten nítidamente */
+    --text-primary: #0f172a;     /* Azul noche profundo para máxima legibilidad */
+    --text-secondary: #475569;   /* Azul pizarra neutro para textos secundarios y subtítulos */
+    --accent-color: #059669;     /* Verde esmeralda vivo (Botones principales, hover y métricas) */
+    --accent-hover: #047857;     /* Esmeralda profundo al pasar el mouse */
+    --border-color: #bae6fd;     /* Bordes en tono azul celeste suave */
+    --shadow: 0 4px 10px -1px rgba(30, 58, 138, 0.08), 0 2px 4px -1px rgba(5, 150, 105, 0.05);
     --radius: 12px;
     --transition: all 0.3s ease;
 }
 
 [data-theme="dark"] {
-    --bg-main: #0f172a;
-    --bg-card: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent-color: #3b82f6;
-    --accent-hover: #60a5fa;
-    --border-color: #334155;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    /* MODO OSCURO: Fondo azul espacial con acentos verde esmeralda neón */
+    --bg-main: #0b1329;          /* Azul medianoche profundo (espacial / tech) */
+    --bg-card: #132043;          /* Azul noche marino para diferenciar las tarjetas del fondo */
+    --text-primary: #f8fafc;     /* Blanco hielo nítido */
+    --text-secondary: #94a3b8;   /* Azul grisáceo suave */
+    --accent-color: #10b981;     /* Verde esmeralda neón resplandeciente */
+    --accent-hover: #34d399;     /* Menta brillante al interactuar */
+    --border-color: #1e3a8a;     /* Bordes azul océano oscuros */
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.6);
 }
 
 /* --- RESET & BASE --- */
@@ -59,7 +61,9 @@ body {
     padding: 1rem 2rem;
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border-color);
+    border-top: 3px solid var(--accent-color); /* Detalle Bio-Tech que une el azul y el esmeralda */
     box-shadow: var(--shadow);
+    transition: var(--transition);
 }
 
 .header-controls {
@@ -132,6 +136,7 @@ input:focus { border-color: var(--accent-color); }
     width: 100%;
     max-width: 400px;
     border: 1px solid var(--border-color);
+    border-top: 4px solid var(--accent-color); /* Toque vibrante en la tarjeta de login */
     text-align: center;
 }
 
@@ -186,24 +191,29 @@ input:focus { border-color: var(--accent-color); }
     align-items: center;
     transition: var(--transition);
 }
-.favorites-list li:hover { border-color: var(--accent-color); }
+.favorites-list li:hover { 
+    border-color: var(--accent-color); 
+    transform: translateX(3px); /* Ligero movimiento animado al pasar el mouse */
+}
 .empty-msg { color: var(--text-secondary); font-size: 0.9rem; text-align: center; padding: 1rem 0; cursor: default !important; border: none !important; background: transparent !important; }
 
 /* --- MAPA --- */
 .content-area { display: flex; flex-direction: column; gap: 1.5rem; }
 .map-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
-.coords-badge { background-color: var(--bg-main); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-family: monospace; border: 1px solid var(--border-color); }
+.coords-badge { background-color: var(--bg-main); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-family: monospace; border: 1px solid var(--border-color); color: var(--accent-color); font-weight: bold; }
 .map-container { height: 400px; width: 100%; border-radius: 8px; z-index: 1; border: 1px solid var(--border-color); }
 
 /* --- METRICAS DE CLIMA --- */
 .weather-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
-.metric { background-color: var(--bg-main); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); }
+.metric { background-color: var(--bg-main); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); transition: var(--transition); }
+.metric:hover { border-color: var(--accent-color); }
 .metric-label { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.3rem; }
 .metric-value { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); }
 
 /* --- PRONOSTICO 7 DIAS --- */
 .forecast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
-.forecast-item { background-color: var(--bg-main); padding: 0.8rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 0.3rem; }
+.forecast-item { background-color: var(--bg-main); padding: 0.8rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 0.3rem; transition: var(--transition); }
+.forecast-item:hover { border-color: var(--accent-color); }
 .forecast-day { font-weight: 600; font-size: 0.9rem; }
 .forecast-icon { font-size: 1.8rem; margin: 0.2rem 0; }
 .forecast-temps { font-size: 0.85rem; color: var(--text-secondary); }
