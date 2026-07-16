@@ -61,4 +61,17 @@ document.addEventListener('DOMContentLoaded', () => {
             MapModule.updateMarker(lat, lng, '⚠️', `${locationName} (Sin datos meteorológicos)`);
         }
     }
+
+    // NUEVO: Registrar el Service Worker para habilitar el Modo Offline
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./service_worker.js')
+                .then((registration) => {
+                    console.log('Service Worker registrado exitosamente en el alcance:', registration.scope);
+                })
+                .catch((error) => {
+                    console.error('Falla en el registro del Service Worker:', error);
+                });
+        });
+    }
 });
