@@ -11,13 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
         MapModule.init();
     }
 
-    // 2. Cargar clima por defecto al iniciar sesión exitosamente
+    // 2. Inicializar el Módulo de Favoritos
+    if (typeof FavoritesModule !== 'undefined') {
+        FavoritesModule.init();
+    }
+
+    // 3. Cargar clima por defecto al iniciar sesión exitosamente
     window.addEventListener('skydash:loginSuccess', () => {
         // Disparar carga de clima para la ubicación inicial del mapa (Caracas)
         fetchAndRenderWeather(MapModule.currentLat, MapModule.currentLng, MapModule.currentLocationName);
     });
 
-    // 3. Escuchar el evento cuando el usuario hace clic en el mapa o busca una localidad
+    // 4. Escuchar el evento cuando el usuario hace clic en el mapa o busca una localidad
     window.addEventListener('skydash:locationChanged', (e) => {
         const { lat, lng, name } = e.detail;
         console.log(`Actualizando clima para: ${name} (${lat.toFixed(2)}, ${lng.toFixed(2)})`);
