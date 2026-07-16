@@ -1,0 +1,217 @@
+/* --- VARIABLES Y SISTEMA DE DISEÑO --- */
+:root {
+    --bg-main: #f4f6f9;
+    --bg-card: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --accent-color: #2563eb;
+    --accent-hover: #1d4ed8;
+    --border-color: #e5e7eb;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #3b82f6;
+    --accent-hover: #60a5fa;
+    --border-color: #334155;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+/* --- RESET & BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    transition: var(--transition);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- UTILIDADES --- */
+.hidden { display: none !important; }
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+/* --- HEADER --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.header-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* --- BOTONES E INPUTS --- */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+.btn-primary:hover { background-color: var(--accent-hover); }
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+.btn-secondary:hover { background-color: var(--border-color); }
+
+.btn-icon {
+    background: transparent;
+    font-size: 1.5rem;
+    padding: 0.4rem;
+}
+
+.btn-sm { padding: 0.3rem 0.8rem; font-size: 0.85rem; }
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    outline: none;
+    transition: var(--transition);
+}
+input:focus { border-color: var(--accent-color); }
+
+/* --- VISTA DE LOGIN --- */
+#login-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 2rem;
+}
+
+.login-card {
+    background-color: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.login-card h2 { margin-bottom: 0.5rem; }
+.subtitle { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.input-group { margin-bottom: 1rem; text-align: left; }
+.input-group label { display: block; font-size: 0.85rem; margin-bottom: 0.3rem; color: var(--text-secondary); }
+#login-submit { width: 100%; margin-top: 0.5rem; }
+.login-hint { margin-top: 1.5rem; color: var(--text-secondary); }
+
+/* --- SPINNER DE CARGA --- */
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- DASHBOARD GRID --- */
+.main-container { flex: 1; display: flex; flex-direction: column; }
+#dashboard-view { padding: 2rem; max-width: 1400px; margin: 0 auto; width: 100%; }
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+}
+
+/* --- SIDEBAR & FAVORITOS --- */
+.sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+.search-bar { display: flex; gap: 0.5rem; margin-top: 1rem; }
+.search-bar input { flex: 1; }
+
+.card-header { display: flex; justify-content: space-between; align-items: center; }
+.subtitle-sm { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem; margin-bottom: 1rem; }
+
+.favorites-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; max-height: 350px; overflow-y: auto; }
+.favorites-list li {
+    padding: 0.75rem;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+.favorites-list li:hover { border-color: var(--accent-color); }
+.empty-msg { color: var(--text-secondary); font-size: 0.9rem; text-align: center; padding: 1rem 0; cursor: default !important; border: none !important; background: transparent !important; }
+
+/* --- MAPA --- */
+.content-area { display: flex; flex-direction: column; gap: 1.5rem; }
+.map-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+.coords-badge { background-color: var(--bg-main); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-family: monospace; border: 1px solid var(--border-color); }
+.map-container { height: 400px; width: 100%; border-radius: 8px; z-index: 1; border: 1px solid var(--border-color); }
+
+/* --- METRICAS DE CLIMA --- */
+.weather-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+.metric { background-color: var(--bg-main); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); }
+.metric-label { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.3rem; }
+.metric-value { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); }
+
+/* --- PRONOSTICO 7 DIAS --- */
+.forecast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+.forecast-item { background-color: var(--bg-main); padding: 0.8rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 0.3rem; }
+.forecast-day { font-weight: 600; font-size: 0.9rem; }
+.forecast-icon { font-size: 1.8rem; margin: 0.2rem 0; }
+.forecast-temps { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 900px) {
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .weather-metrics { grid-template-columns: 1fr; }
+    .app-header { padding: 1rem; }
+    #dashboard-view { padding: 1rem; }
+}
